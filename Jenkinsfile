@@ -35,8 +35,8 @@ pipeline {
         }
          stage('Configure Server with terraform and deploy using Ansible') {
            steps {
-              dir('my-serverfiles') {
-              sh 'sudo chmod 600 shrenukey.pem'
+              dir('Terraform-serverfiles') {
+              sh 'sudo chmod 600 Terraform.pem'
               sh 'terraform init'
               sh 'terraform validate'
               sh 'terraform apply --auto-approve'
