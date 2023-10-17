@@ -20,6 +20,14 @@ pipeline {
             steps {
                 sh 'docker build -t ssahana99/my-banking-project:1.0 .'
             }
-        } 
+        }
+        stage('Docker Push Image') {
+            steps {
+               withCredentials([usernamePassword(credentialsId: 'Docker-hub', passwordVariable: 'docker_password', usernameVariable: 'docker_login')]) {
+               sh 'docker login -u ${docker_login} -p ${docker_password}'
+                        }
+               sh 'docker push ssahana99/my-banking-project:1.0'
+            }    
+        }
     }
  }
