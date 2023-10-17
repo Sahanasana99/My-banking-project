@@ -1,0 +1,14 @@
+- name: Configure Docker on Test-server Instances
+  hosts: all
+  become: true
+  connection: ssh
+  tasks :
+  - name: updating my server using apt
+
+    command: sudo apt update
+  - name: Install Docker using apt
+    command: sudo apt install docker.io -y
+  - name: start Docker Service 
+    command: sudo systemctl start docker
+  - name: Run the Banking application on Test-server
+    command: sudo docker run -dt -p 8084:8081 ssahana99/my-banking-project:1.0
