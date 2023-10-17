@@ -33,5 +33,15 @@ pipeline {
                sh 'docker push ssahana99/my-banking-project:1.0'
             }    
         }
+         stage('Configure Server with terraform and deploy using Ansible') {
+           steps {
+              dir('my-serverfiles') {
+              sh 'sudo chmod 600 shrenukey.pem'
+              sh 'terraform init'
+              sh 'terraform validate'
+              sh 'terraform apply --auto-approve'
+               }
+           }
+       }
     }
  }
